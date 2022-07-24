@@ -1,8 +1,9 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import { magic } from '../lib/magic';
 import { useEffect, useState } from 'react';
+import { withRouter } from 'next/router';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
 
   const [user, setUser] = useState()
 
@@ -10,7 +11,7 @@ function MyApp({ Component, pageProps }) {
     async function initUser () {
       // setUser({ loading: true });
       const isLoggedIn = await magic.user.isLoggedIn()
-      console.log(isLoggedIn)
+      console.log(isLoggedIn,22)
         if (isLoggedIn) {
           const userData = await magic.user.getMetadata()
           const userInfo ={
@@ -18,12 +19,11 @@ function MyApp({ Component, pageProps }) {
             'email':userData.email
           }
           console.log(userInfo)
-          // // const res = await getUser(userInfo)
-          // userData['data'] = res
           setUser(userData)
+          router.push('/dash')
         } else {
-            if(router.asPath == '/dash' ){
-              Router.push('/'), setUser( null )
+            if(router.asPath !== '/' ){
+              router.push('/'), setUser( null )
             } else (
               setUser( null )
             )
@@ -32,7 +32,11 @@ function MyApp({ Component, pageProps }) {
     initUser()
   }, [process]);
 
-  return <Component {...pageProps} user={user} />
+  return( 
+    <span>
+      <Component {...pageProps} user={user} />
+    </span>
+  )
 }
 
-export default MyApp
+export default withRouter(MyApp)

@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
-import { Icon, MonochromeIcons, CallToAction } from '@magiclabs/ui';
-import styles from '../styles/Master.module.css'
+import styles from '../styles/Master.module.scss'
 // import useOutside from './Functions/useOutside';
 // import LoadingSmall from './LoadingSmall'
 // import useKeyPres from './Functions/useKeyPres';
@@ -24,7 +23,6 @@ const EmailForm = ({ onEmailSubmit, disabled, set, state }) => {
     return (<>
         <div className={styles.login}>
             <form  onSubmit={handleSubmit}>
-                <h3>Login</h3>
                 <div >
                     <input
                         placeholder='Enter your email'
@@ -32,18 +30,15 @@ const EmailForm = ({ onEmailSubmit, disabled, set, state }) => {
                         type='email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        prefix={<Icon inline type={MonochromeIcons.Envelope} size={22} />}
                     />
                 </div>
+                <hr></hr>
                 <div>
-                    <CallToAction
-                        leadingIcon={MonochromeIcons.PaperPlane}
-                        color='primary'
-                        size='sm'
+                    <button 
                         disabled={disabled}
-                        onClick={(e)=>{handleSubmit(e), load()}}
-                    >Send login link
-                    </CallToAction>
+                        onClick={(e)=>{handleSubmit(e), load()}}>
+                        Login with Email
+                    </button>
                 </div>
             </form>
         </div>
