@@ -2,6 +2,7 @@ import '../styles/globals.scss'
 import { magic } from '../lib/magic';
 import { useEffect, useState } from 'react';
 import { withRouter } from 'next/router';
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps, router }) {
 
