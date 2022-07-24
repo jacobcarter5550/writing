@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps, router }) {
             'id':userData.publicAddress,
             'email':userData.email
           }
-          console.log(userInfo)
+          console.log(userData,44)
           setUser(userData)
           router.push('/dash')
         } else {
@@ -32,9 +32,20 @@ function MyApp({ Component, pageProps, router }) {
     initUser()
   }, [process]);
 
+  async function logOut() {
+    await magic.user.logout().then(()=>{
+      router.push('/')
+    })
+  }
+
   return( 
     <span>
-      <Component {...pageProps} user={user} />
+      <Head>
+        <title>Publishing Pals</title>
+        <meta name="description" content="Where Publishing Pals come together" />
+        <link rel="icon" href="/PubPal.svg" />
+      </Head>
+      <Component {...pageProps} user={user} logOut={logOut}/>
     </span>
   )
 }
