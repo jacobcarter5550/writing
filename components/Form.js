@@ -49,7 +49,7 @@ function Form({user, r}) {
             <textarea rows="3" placeholder='Introduction' onChange={(e)=>{setNew(e,'first')}}/>
             <h3 style={{color:isFilled('first')}}>What are some topics that intrest you? (Choose up to six)</h3>
             <aside className={styles.tags}>
-                {topics.map((item)=>{
+                {topics.map((item, ind)=>{
                     function setOAdd() {
                         if(formData.interest_tags.includes(item)) {
                             const removed = formData.interest_tags.filter((one)=>one !== item)
@@ -67,7 +67,7 @@ function Form({user, r}) {
                         }
                     }
                     const selceted = formData.interest_tags.includes(item) ? {backgroundColor: '#2E2E2F', border: '1px solid #C59F5D', boxShadow: '0px 0px 20px rgba(236, 229, 233, 0.25)', color:'#9ABD76',transition: 'all ease-in-out .2s'} : {transition: 'all ease-in-out .2s'}
-                    return <p style={selceted} onClick={()=>{setOAdd()}}>{item}</p>})
+                    return <p key={ind} style={selceted} onClick={()=>{setOAdd()}}>{item}</p>})
                 }
             </aside>
             <button onClick={()=>{setFormData(prevState=>({...prevState,interest_tags : []}))}} style={{marginTop:'20px', opacity :formData.interest_tags.length > 0 ? '1' : '0'}}>Clear</button>

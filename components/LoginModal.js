@@ -4,6 +4,7 @@ import { magic } from '../lib/magic'
 import EmailForm from './MagicEmail'
 import useOutside from './function/useOutside'
 import styles from '../styles/Master.module.scss'
+import Link from 'next/link'
 
 const Login = ({set, state, sol}) => {
 
@@ -75,7 +76,7 @@ const Login = ({set, state, sol}) => {
                     <span>
                         <button onClick={()=>{setLogin(!login)}}>{sOl(sol)} with Email</button>
                         <hr />
-                        <button ><a href='/'>{sOl(sol)} with Facebook</a></button>
+                        <button ><Link href='/'>{sOl(sol)} with Facebook</Link></button>
                     </span>
                 :
                     <span>

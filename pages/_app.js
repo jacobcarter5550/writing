@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps, router }) {
         }
     }
     initUser()
-  }, [process]);
+  }, []);
 
   async function logOut() {
     await magic.user.logout().then(()=>{
