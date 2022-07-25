@@ -2,9 +2,10 @@ import Test from "../components/Test"
 
 
 
+
 function test ({user}) {
     return(<>
-    <Test user={user}></Test>
+        <Test user={user}></Test>
     </>)
 
 }

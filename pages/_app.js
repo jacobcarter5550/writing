@@ -3,6 +3,7 @@ import { magic } from '../lib/magic';
 import { useEffect, useState } from 'react';
 import { withRouter } from 'next/router';
 import Head from 'next/head'
+import {getUser} from '../lib/api';
 
 function MyApp({ Component, pageProps, router }) {
 
@@ -10,18 +11,21 @@ function MyApp({ Component, pageProps, router }) {
 
   useEffect(() => {
     async function initUser () {
-      // setUser({ loading: true });
       const isLoggedIn = await magic.user.isLoggedIn()
-      console.log(isLoggedIn,22)
         if (isLoggedIn) {
           const userData = await magic.user.getMetadata()
-          const userInfo ={
-            'id':userData.publicAddress,
-            'email':userData.email
+          const res = await getUser({userData: await userData}),
+          userSynth = {
+            ...userData,
+            ...res.data
           }
-          console.log(userData,44)
-          setUser(userData)
-          router.push('/dash')
+          setUser(userSynth)
+
+          if(userSynth.questionID.submitted == false){
+            router.push('/onboarding')
+          } else if(router.asPath == '/') {
+            router.push('/dash')
+          }
         } else {
             if(router.asPath !== '/' ){
               router.push('/'), setUser( null )
@@ -46,7 +50,7 @@ function MyApp({ Component, pageProps, router }) {
         <meta name="description" content="Where Publishing Pals come together" />
         <link rel="icon" href="/PubPal.svg" />
       </Head>
-      <Component {...pageProps} user={user} logOut={logOut}/>
+      <Component {...pageProps} user={user} logOut={logOut} r={router}/>
     </span>
   )
 }

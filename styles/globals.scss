@@ -36,7 +36,14 @@ h2{
   font-weight: 300;
 }
 
+h3{
+  color: #9ABD76;
+  font-family: 'Raleway';
+  font-weight: 300;
+}
+
 p{
+  font-family: 'Work Sans';
   color: #ECE5E9;
 }
 
@@ -47,6 +54,7 @@ button{
     background-color: rgba(0, 0, 0, 0);
     border: none;
     transition: all ease-in-out .2s;
+    cursor: pointer;
 
     &:hover{
         color: #C59F5D ;

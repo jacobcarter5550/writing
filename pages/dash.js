@@ -1,13 +1,12 @@
 import magic from '../lib/magic'
 
 
-function dash({router,logOut}) {
+function dash({r,logOut}) {
 
 
     return (
         <div>
             <h1>Dash</h1>
-            <button onClick={()=>{logOut()}}>Log TF OUT</button>
         </div>
   )
 }

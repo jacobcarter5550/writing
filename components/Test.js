@@ -1,7 +1,13 @@
 
+import Loading from "./Loading"
+
+
+
 function Test ({user}) {
+
+
 return (<>
-    <h1>test</h1>
+    <Loading />
 </>)
 }
 
