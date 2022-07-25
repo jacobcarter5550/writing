@@ -76,7 +76,8 @@ const Login = ({set, state, sol}) => {
                     <span>
                         <button onClick={()=>{setLogin(!login)}}>{sOl(sol)} with Email</button>
                         <hr />
-                        <button ><Link href='/'>{sOl(sol)} with Facebook</Link></button>
+                        {/* <button ><Link href='/'>{sOl(sol)} with Facebook</Link></button> */}
+                        <button disabled={true}>{sOl(sol)} with Facebook</button>
                     </span>
                 :
                     <span>
