@@ -7,11 +7,24 @@ import styles from '../styles/Master.module.scss'
 import Link from 'next/link'
 import {Magic} from 'magic-sdk'
 import { OAuthExtension } from '@magic-ext/oauth';
+import Loading from './Loading'
+import { getUser } from '../lib/api'
+import { useCookies } from "react-cookie";
+import { useContext} from 'react'
+import { UserContext } from '../lib/UserContext';
 
 const Login = ({set, state, sol}) => {
-    const [func, setFunction] = useState()
-    const [login, setLogin] = useState(false)
-    const [disabled, setDisabled] = useState(false);
+    const [func, setFunction] = useState(),
+    [login, setLogin] = useState(false),
+    [disabled, setDisabled] = useState(false),
+    [loading, setLoading] = useState(false),
+    [userCookie, setUC, removeUC] = useCookies(['user']),
+    [user, setUser, posts] = useContext(UserContext)
+
+    function addMonths(date, months) {
+        date.setMonth(date.getMonth() + months);
+        return date.toUTCString();
+    }
 
     useEffect(() => {
         const magic = new Magic('pk_live_9711D265BE922178', {
@@ -36,14 +49,14 @@ const Login = ({set, state, sol}) => {
             });
             if (res.status == 200) {
                 const userData = await magic.user.getMetadata()
-                const userInfo ={
-                    'id': userData.publicAddress,
-                    'email': userData.email
+                setUC('user', btoa(JSON.stringify(userData), {expires : addMonths(new Date(), + 6)}))
+                const res = await getUser({userData: await userData}),
+                userSynth = {
+                    ...userData,
+                    ...res.data
                 }
-                const account = await getUser(userInfo)
-                userData["data"] = account
-                setUser(userData)
-                set(!state)
+                setUser(userSynth)
+                setLoading(!loading)
             }
         } catch (error) {
             setDisabled(false);
@@ -67,11 +80,12 @@ const Login = ({set, state, sol}) => {
     async function gotToFB () {
         await func.oauth.loginWithRedirect({
             provider: 'facebook',
-            redirectURI: 'https://www.publishingpals.xyz//redirect',
+            redirectURI: 'http://localhost:3010/redirect',
         });
     }
 
     return (<>
+        {loading && <Loading loading={loading}/>}
         <div className={styles.login}>
             <aside >
                 <h1>{sOl(sol)}!</h1>
@@ -79,11 +93,11 @@ const Login = ({set, state, sol}) => {
                     <span>
                         <button onClick={()=>{setLogin(!login)}}>{sOl(sol)} with Email</button>
                         <hr />
-                        <button onClick={()=>{gotToFB()}}>{sOl(sol)} with Facebook</button>
+                        <button onClick={()=>{setLoading(!loading), gotToFB()}}>{sOl(sol)} with Facebook</button>
                     </span>
                 :
                     <span>
-                        <EmailForm onEmailSubmit={handleLoginWithEmail}/>
+                        <EmailForm onEmailSubmit={handleLoginWithEmail} loading={loading} setLoading={setLoading}/>
                     </span>
                 }
             </aside>

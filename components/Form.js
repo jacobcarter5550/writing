@@ -2,8 +2,12 @@ import {useState, } from 'react'
 import styles from '../styles/Master.module.scss'
 import { updateUserForm } from '../lib/api'
 import Loading from './Loading'
+import { useContext} from 'react'
+import { UserContext } from '../lib/UserContext';
 
-function Form({user, r}) {
+function Form({r}) {
+    const [user, setUser, posts] = useContext(UserContext)
+
     const value = r.state?.query.name ?  r.state.query.name : null
 
     const [loading, setLoading] = useState(false)
@@ -38,6 +42,8 @@ function Form({user, r}) {
             form:form
         })
         if(res.status == 200){ 
+            user['name'] = formData.name
+            setUser(user)
             r.push('/dash')
         } else{ 
             alert('oh boy')

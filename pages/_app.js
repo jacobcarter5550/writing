@@ -4,63 +4,39 @@ import { useEffect, useState } from 'react';
 import { withRouter } from 'next/router';
 import Head from 'next/head'
 import {getUser} from '../lib/api';
-import { Provider } from 'react-redux';
 import { UserContext } from '../lib/UserContext';
+import { CookiesProvider, useCookies } from "react-cookie";
+import initUser from '../components/function/initUser';
+import outUser from '../components/function/outUser';
 
 function MyApp({ Component, pageProps, router }) {
 
   const [user, setUser] = useState()
 
-  useEffect(() => {
-    async function initUser () {
-      const isLoggedIn = await magic.user.isLoggedIn()
-        if (isLoggedIn && !router.asPath.includes('/redirect')) {
-          const userData = await magic.user.getMetadata()
-          const res = await getUser({userData: await userData}),
-          userSynth = {
-            ...userData,
-            ...res.data
-          }
-          setUser(userSynth)
+  const [userCookie, setUC, removeUC] = useCookies(['user'])
 
-          if(userSynth.questionID.submitted == false){
-            router.push('/onboarding')
-          } else if(router.asPath == '/') {
-            router.push('/dash')
-          }
-        } else {
-          if(router.asPath !== '/redirect') {
-            if(router.asPath !== '/' ){
-
-                router.push('/'), setUser( null )
-              } else {
-
-              }
-            } else (
-              setUser( null )
-            )
-        }
+useEffect(() => {
+  if(!router.asPath.includes('redirect')){
+      initUser(setUser,userCookie, magic, router, setUC, getUser)
     }
-    initUser()
   }, []);
 
-  async function logOut() {
-    await magic.user.logout().then(()=>{
-      router.push('/')
-    })
+  function logOut () {
+    outUser(magic, router, removeUC)
   }
-
-  return( 
-    <UserContext.Provider value={[user, setUser]}>
-      <span>
-        <Head>
-          <title>Publishing Pals</title>
-          <meta name="description" content="Where Publishing Pals come together" />
-          <link rel="icon" href="/PubPal.svg" />
-        </Head>
-        <Component {...pageProps} user={user} logOut={logOut} r={router} magic={magic}/>
-      </span>
-    </UserContext.Provider>
+  return(
+    <CookiesProvider>
+      <UserContext.Provider value={[user, setUser]}>
+        <span>
+          <Head>
+            <title>Publishing Pals</title>
+            <meta name="description" content="Where Publishing Pals come together" />
+            <link rel="icon" href="/PubPal.svg" />
+          </Head>
+          <Component {...pageProps} user={user} logOut={logOut} r={router} magic={magic}/>
+        </span>
+      </UserContext.Provider>
+    </CookiesProvider>
   )
 }
 

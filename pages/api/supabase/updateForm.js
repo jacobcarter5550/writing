@@ -29,6 +29,11 @@ export default async function updateForm (req, res) {
     })
     .match({ id: userData.questionID.id })
 
+    await supabase
+    .from ('users')
+    .update({name: form.name})
+    .match({id :userData.id})
+
     res.json(data)
     res.status(200).end()
 }

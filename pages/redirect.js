@@ -4,13 +4,21 @@ import { Magic } from 'magic-sdk';
 import { OAuthExtension } from '@magic-ext/oauth';
 import { setFBUser } from '../lib/api';
 import Loading from '../components/Loading';
+import { useCookies } from "react-cookie";
 
 
 function redirect({r}) {
-    const [ress, setRes ] = useState()
-    const [func, setFunc] = useState()
-    const [user, setUser, posts] = useContext(UserContext);
+    const [ress, setRes ] = useState(),
+        [func, setFunc] = useState(),
+        [user, setUser, posts] = useContext(UserContext);
 
+
+    const [userCookie, setUC, removeUC] = useCookies(['user'])
+
+    function addMonths(date, months) {
+        date.setMonth(date.getMonth() + months);
+        return date.toUTCString();
+    }
 
     useEffect(() => {
         const magic = new Magic('pk_live_9711D265BE922178', {
@@ -19,11 +27,7 @@ function redirect({r}) {
         setFunc(magic)
         async function tryGetResult () {
             async function handleRedir () {
-                try {
-                    return await magic?.oauth.getRedirectResult();
-                } catch (error) {
-                    console.log(error)
-                }
+                try {return await magic?.oauth.getRedirectResult();} catch (error) {console.log(error)}
             }
             const result = await handleRedir()
 
@@ -36,6 +40,7 @@ function redirect({r}) {
                         ...res
                     }
                 setUser(userSynth)
+                setUC('user', btoa(JSON.stringify(userData), {expires : addMonths(new Date(), + 6)}))
                 if(userSynth.questionID.submitted == false){
                     r.push({
                         pathname: '/onboarding',
