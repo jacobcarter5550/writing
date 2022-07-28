@@ -80,7 +80,7 @@ const Login = ({set, state, sol}) => {
     async function gotToFB () {
         await func.oauth.loginWithRedirect({
             provider: 'facebook',
-            redirectURI: 'http://localhost:3010/redirect',
+            redirectURI: 'https://www.publishingpals.xyz/redirect',
         });
     }
 
