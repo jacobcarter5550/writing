@@ -30,6 +30,7 @@ function redirect({r}) {
                 try {return await magic?.oauth.getRedirectResult();} catch (error) {console.log(error)}
             }
             const result = await handleRedir()
+            console.log(result)
 
             if(result) {
                 setRes(result)
