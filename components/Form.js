@@ -4,9 +4,10 @@ import { updateUserForm } from '../lib/api'
 import Loading from './Loading'
 
 function Form({user, r}) {
+    const value = r.state?.query.name ?  r.state.query.name : null
 
     const [loading, setLoading] = useState(false)
-    const [formData, setFormData] = useState({interest_tags:[]})
+    const [formData, setFormData] = useState({interest_tags:[], name: value})
 
     const topics = ['Web3', 'Crypto', 'Future of Work', 'Product Management', 'Dating', 'Advice', 'Software Development', 'Startups', 'Short Stories', 'Habit Optimization', 'Open Learning', 'Artificial Intelligence', 'Fitness', 'Diet', 'YouTube', 'Twitter', 'Social Media', 'Machine Learning', 'Hardware Development', 'Graphic Design', 'Cooking', 'Art', 'Poetry', 'Creative Writing', 'Traveling', 'Nomading', 'Animation', 'Data Science', 'Bio-Science', 'Climate Change', 'Neuro-Tech', ]
 
@@ -22,6 +23,7 @@ function Form({user, r}) {
     }
 
     const isDisabled = (
+        formData.name == ("" || undefined ) || 
         formData.first == ("" || undefined ) || 
         formData.second == ("" || undefined ) ||
         formData.third == ("" || undefined ) ||
@@ -46,6 +48,10 @@ function Form({user, r}) {
         <>
             <Loading loading={loading}/>
             <h3 style={{color:isFilled('first')}}>Write a little about yourself!<span>*</span></h3>
+            <span style={{display:'flex', justifyContent:'initial', alignItems: 'center'}}> 
+                <h3 style={{color:isFilled('name')}}><span style={{marginLeft:'0px', marginRight:'5px' }}>*</span>Name :</h3>
+                <input onChange={(e)=>{setNew(e,'name')}} type="text" placeholder='Me llamo' value={value}/>
+            </span>
             <textarea rows="3" placeholder='Introduction' onChange={(e)=>{setNew(e,'first')}}/>
             <h3 style={{color:isFilled('first')}}>What are some topics that intrest you? (Choose up to six)</h3>
             <aside className={styles.tags}>

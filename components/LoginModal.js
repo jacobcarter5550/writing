@@ -1,16 +1,24 @@
-import { useState, useContext, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Router from 'next/router'
 import { magic } from '../lib/magic'
 import EmailForm from './MagicEmail'
 import useOutside from './function/useOutside'
 import styles from '../styles/Master.module.scss'
 import Link from 'next/link'
+import {Magic} from 'magic-sdk'
+import { OAuthExtension } from '@magic-ext/oauth';
 
 const Login = ({set, state, sol}) => {
-
+    const [func, setFunction] = useState()
     const [login, setLogin] = useState(false)
-
     const [disabled, setDisabled] = useState(false);
+
+    useEffect(() => {
+        const magic = new Magic('pk_live_9711D265BE922178', {
+            extensions: [new OAuthExtension()],
+        });
+        setFunction(magic)
+    }, [])
 
     async function handleLoginWithEmail(email) {
         try {
@@ -42,11 +50,6 @@ const Login = ({set, state, sol}) => {
         }
     }
 
-    // const animo = useSpring({
-    //     config: { duration: 100 },
-    //     opacity: state ? 1: 0,
-    //     width:'100vw', top: 0, height:'100vh',position: 'absolute', zIndex: 5, backgroundColor: 'rgba(0, 0, 0, 0.5)'
-    // })
     function sOl (arg) {
         switch (arg) {
             case 'o':
@@ -61,10 +64,10 @@ const Login = ({set, state, sol}) => {
     const modal = useRef()
     useOutside(modal, ()=>{set(!state)}, null)
 
-    async function loginWithFB () {
-        await magic.oauth.loginWithRedirect({
+    async function gotToFB () {
+        await func.oauth.loginWithRedirect({
             provider: 'facebook',
-            redirectURI: 'https://your-app.com/your/oauth/callback',
+            redirectURI: 'https://www.publishingpals.xyz//redirect',
         });
     }
 
@@ -76,8 +79,7 @@ const Login = ({set, state, sol}) => {
                     <span>
                         <button onClick={()=>{setLogin(!login)}}>{sOl(sol)} with Email</button>
                         <hr />
-                        {/* <button ><Link href='/'>{sOl(sol)} with Facebook</Link></button> */}
-                        <button disabled={true}>{sOl(sol)} with Facebook</button>
+                        <button onClick={()=>{gotToFB()}}>{sOl(sol)} with Facebook</button>
                     </span>
                 :
                     <span>

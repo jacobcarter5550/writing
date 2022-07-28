@@ -13,7 +13,7 @@ export default async function testSuabase (req, res) {
         id = userData.publicAddress,
         uuid = uuidv4()
 
-    let { data, error } = await supabase.from('users').select('*, questionID(*)').match({id:id})
+    let { data, error } = await supabase.from('users').select('*, questionID(*),fbData(*)').match({id:id})
 
     if(data == (null || '')) {
         await supabase .from('questions').insert([{
@@ -22,7 +22,7 @@ export default async function testSuabase (req, res) {
             id : id, email : email, issuer: userData.issuer, questionID:uuid
         }]))
 
-        const {data:resp, error} = await supabase.from('users').select('*, questionID(*)').match({id:id})
+        const {data:resp, error} = await supabase.from('users').select('*, questionID(*), fbData(*)').match({id:id})
 
         res.json(resp[0])
     } else {

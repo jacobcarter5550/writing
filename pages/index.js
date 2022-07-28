@@ -2,12 +2,16 @@ import Head from 'next/head'
 import styles from '../styles/Master.module.scss'
 import Lander from '../components/Lander'
 
-function Home({user}) {
-
+function Home({user, logOut}) {
+  
   return (
     <div className={styles.lander}>
       <section className={styles.body}>
-        <Lander user={user}/>
+        {user !== null || user !== undefined ?
+          <Lander user={user}/>
+        :
+          <h1 onClick={ ()=>{logOut()}}>Log Out</h1>
+        }
       </section>
     </div>
   )

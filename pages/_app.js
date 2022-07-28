@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { withRouter } from 'next/router';
 import Head from 'next/head'
 import {getUser} from '../lib/api';
+import { Provider } from 'react-redux';
+import { UserContext } from '../lib/UserContext';
 
 function MyApp({ Component, pageProps, router }) {
 
@@ -12,7 +14,7 @@ function MyApp({ Component, pageProps, router }) {
   useEffect(() => {
     async function initUser () {
       const isLoggedIn = await magic.user.isLoggedIn()
-        if (isLoggedIn) {
+        if (isLoggedIn && !router.asPath.includes('/redirect')) {
           const userData = await magic.user.getMetadata()
           const res = await getUser({userData: await userData}),
           userSynth = {
@@ -27,7 +29,7 @@ function MyApp({ Component, pageProps, router }) {
             router.push('/dash')
           }
         } else {
-            if(router.asPath !== '/' ){
+            if(router.asPath !== '/' || router.asPath !== '/redirect' ){
               router.push('/'), setUser( null )
             } else (
               setUser( null )
@@ -44,14 +46,16 @@ function MyApp({ Component, pageProps, router }) {
   }
 
   return( 
-    <span>
-      <Head>
-        <title>Publishing Pals</title>
-        <meta name="description" content="Where Publishing Pals come together" />
-        <link rel="icon" href="/PubPal.svg" />
-      </Head>
-      <Component {...pageProps} user={user} logOut={logOut} r={router}/>
-    </span>
+    <UserContext.Provider value={[user, setUser]}>
+      <span>
+        <Head>
+          <title>Publishing Pals</title>
+          <meta name="description" content="Where Publishing Pals come together" />
+          <link rel="icon" href="/PubPal.svg" />
+        </Head>
+        <Component {...pageProps} user={user} logOut={logOut} r={router} magic={magic}/>
+      </span>
+    </UserContext.Provider>
   )
 }
 
