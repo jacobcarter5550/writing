@@ -29,12 +29,12 @@ function MyApp({ Component, pageProps, router }) {
             router.push('/dash')
           }
         } else {
+          if(router.asPath !== '/redirect') {
             if(router.asPath !== '/' ){
-              if(router.asPath !== '/redirect') {
 
                 router.push('/'), setUser( null )
               } else {
-                
+
               }
             } else (
               setUser( null )
