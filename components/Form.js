@@ -53,6 +53,7 @@ function Form({r}) {
     return (
         <>
             <Loading loading={loading}/>
+            <h3 style={{color:'white'}}><a target='_blank' href="https://docs.google.com/spreadsheets/d/197qfWMZbkbFerAN5C8mNlnC8bi59sDfPCZmDQBP0r7w/edit#gid=191006670"> Already filled out a profile form? Click here to copy/paste your answers in! →</a></h3>
             <h3 style={{color:isFilled('first')}}>Write a little about yourself!<span>*</span></h3>
             <span style={{display:'flex', justifyContent:'initial', alignItems: 'center'}}> 
                 <h3 style={{color:isFilled('name')}}><span style={{marginLeft:'0px', marginRight:'5px' }}>*</span>Name :</h3>

@@ -76,12 +76,9 @@ const Login = ({set, state, sol, m, r}) => {
         {loading && <Loading loading={loading}/>}
         <div className={styles.login}>
             <aside >
-                <h1>{sOl(sol)}!</h1>
                 {!login ? 
                     <span>
-                        <button onClick={()=>{setLogin(!login)}}>{sOl(sol)} with Email</button>
-                        <hr />
-                        <button onClick={()=>{setLoading(!loading), gotToFB()}}>{sOl(sol)} with Facebook</button>
+                        <button style={{display:'flex',alignItems:'center', justifyContent:'space-evenly', width:'310px'}} onClick={()=>{setLoading(!loading), gotToFB()}}>{sOl(sol)} with Facebook <img style={{marginLeft:'1%'}} src="https://developers.facebook.com/favicon.ico" alt="" /> </button>
                     </span>
                 :
                     <span>

@@ -11,14 +11,13 @@ function dash({r,logOut}) {
             <Loading loading={true}/> 
         :
             <div>
-                <h1>Dash</h1>
+                <h1>Profile</h1>
                 <h1>{user.name ?? user.fbData?.name}</h1>
                 {user.fbData?.pictureURL ? 
                     <img style={{width:'50px', height: '50px'}} src={user.profile ?? user.fbData.pictureURL}/>
                 :
                     <h1>We'll let you upload a picture soon!</h1>
                 }
-                <h1 onClick={()=>{logOut()}}>Log Out</h1>
             </div>
         }
     </>)

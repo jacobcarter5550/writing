@@ -19,9 +19,9 @@ function Lander({user, m, r}) {
             <Login set={set} state={focus} sol={sol} m={m} r={r}/> 
         : 
             <span>
-                <button onClick={()=>{flashLogin('o')}}>Sign Up</button>
-                <hr />
                 <button onClick={()=>{flashLogin('s')}}>Login!</button>
+                <hr />
+                <button style={{color:'#C59F5D'}} onClick={()=>{flashLogin('o')}}>Sign Up</button>
             </span>
         }
     </>)
