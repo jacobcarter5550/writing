@@ -12,7 +12,6 @@ function redirect({r}) {
         [func, setFunc] = useState(),
         [user, setUser, posts] = useContext(UserContext);
 
-
     const [userCookie, setUC, removeUC] = useCookies(['user'])
 
     function addMonths(date, months) {
@@ -30,7 +29,6 @@ function redirect({r}) {
                 try {return await magic?.oauth.getRedirectResult();} catch (error) {console.log(error)}
             }
             const result = await handleRedir()
-            console.log(result)
 
             if(result) {
                 setRes(result)

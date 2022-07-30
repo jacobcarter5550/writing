@@ -4,7 +4,6 @@ import { magic } from '../lib/magic'
 import EmailForm from './MagicEmail'
 import useOutside from './function/useOutside'
 import styles from '../styles/Master.module.scss'
-import Link from 'next/link'
 import {Magic} from 'magic-sdk'
 import { OAuthExtension } from '@magic-ext/oauth';
 import Loading from './Loading'
@@ -12,8 +11,9 @@ import { getUser } from '../lib/api'
 import { useCookies } from "react-cookie";
 import { useContext} from 'react'
 import { UserContext } from '../lib/UserContext';
+import initUser from './function/initUser'
 
-const Login = ({set, state, sol}) => {
+const Login = ({set, state, sol, m, r}) => {
     const [func, setFunction] = useState(),
     [login, setLogin] = useState(false),
     [disabled, setDisabled] = useState(false),
@@ -34,32 +34,20 @@ const Login = ({set, state, sol}) => {
     }, [])
 
     async function handleLoginWithEmail(email) {
-        try {
-            setDisabled(true);
-            let didToken = await magic.auth.loginWithMagicLink({
-                email,
-            });
+        let didToken = await magic.auth.loginWithMagicLink({
+            email,
+        });
 
-            const res = await fetch('/api/magic/login', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + didToken,
-                },
-            });
-            if (res.status == 200) {
-                const userData = await magic.user.getMetadata()
-                setUC('user', btoa(JSON.stringify(userData), {expires : addMonths(new Date(), + 6)}))
-                const res = await getUser({userData: await userData}),
-                userSynth = {
-                    ...userData,
-                    ...res.data
-                }
-                setUser(userSynth)
-                setLoading(!loading)
-            }
-        } catch (error) {
-            setDisabled(false);
+        const res = await fetch('/api/magic/login', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + didToken,
+            },
+        });
+        if (res.status == 200) {
+            initUser(setUser,userCookie, m, r, setUC, getUser)
+            setLoading(!loading)
         }
     }
 

@@ -2,7 +2,7 @@ import styles from '../styles/Master.module.scss'
 import Login from '../components/LoginModal'
 import { useState } from 'react'
 
-function Lander({user}) {
+function Lander({user, m, r}) {
 
     const [ focus, set ] = useState(false)
     const [ sol, setSol ] = useState()
@@ -16,7 +16,7 @@ function Lander({user}) {
         <img src="/PubPal.svg" alt="" />
         <h1 style={{marginBottom:'10%'}}>Welcome to Publishing Pals</h1>
         {focus ? 
-            <Login set={set} state={focus} sol={sol}/> 
+            <Login set={set} state={focus} sol={sol} m={m} r={r}/> 
         : 
             <span>
                 <button onClick={()=>{flashLogin('o')}}>Sign Up</button>

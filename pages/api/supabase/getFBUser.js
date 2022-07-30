@@ -1,6 +1,8 @@
 
 import { createClient } from '@supabase/supabase-js'
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { notionCreate } from '../../../lib/api'
 
 const supabaseUrl = 'https://kxbbsrhjudgafnkyawbw.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
@@ -20,12 +22,12 @@ export default async function getUserFB (req, res) {
         pic = oauth.userInfo.sources[graph].picture.data.url,
         uuid = uuidv4()
 
-
-    console.log(pic)
-
     let { data, error } = await supabase.from('users').select('*, questionID(*),fbData(*)').match({id:id})
 
     if(data == (null || '')) {
+
+        const notion = await axios.post(`${address}/api/notion/notionDBCreate`,{name:name})
+
         await supabase .from('questions').insert([{
             id:uuid
         }]).then(async()=> await supabase.from('facebookUserData').insert([{
@@ -36,14 +38,13 @@ export default async function getUserFB (req, res) {
             pictureURL : pic,
             name : name
         }])).then(async()=> await supabase.from('users').insert([{
-            id : id, email : email, issuer: magic.issuer, questionID:uuid, isFB :true, fbData : idToke, name : name
+            id : id, email : email, issuer: 'fb', questionID:uuid, isFB :true, fbData : idToke, name : name, dbID : notion.id
         }]))
 
-        const {data:resp, error} = await supabase.from('users').select('*, questionID(*), fbData(*),').match({id:id})
+        const {data: resp, error} = await supabase.from('users').select('*, questionID(*), fbData(*),').match({id:id})
 
         res.json(resp[0])
     } else {
-        console.log('here')
         res.json(data[0])
     }
 

@@ -4,7 +4,6 @@ import Loading from '../components/Loading';
 
 
 function dash({r,logOut}) {
-
     const [user, setUser, posts] = useContext(UserContext);
     
     return (<>
@@ -13,7 +12,7 @@ function dash({r,logOut}) {
         :
             <div>
                 <h1>Dash</h1>
-                <h1>{user.name ?? user.fbData.name}</h1>
+                <h1>{user.name ?? user.fbData?.name}</h1>
                 {user.fbData?.pictureURL ? 
                     <img style={{width:'50px', height: '50px'}} src={user.profile ?? user.fbData.pictureURL}/>
                 :
