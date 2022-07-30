@@ -27,7 +27,7 @@ useEffect(() => {
   }
 
   const ifRoute = (router.asPath !== '/' && !router.asPath.includes('redirect') && router.asPath !== '/onboarding') ? true : false
-  
+
   return(
     <CookiesProvider>
       <UserContext.Provider value={[user, setUser]}>
@@ -37,7 +37,7 @@ useEffect(() => {
             <meta name="description" content="Where Publishing Pals come together" />
             <link rel="icon" href="/PubPal.svg" />
           </Head>
-          {ifRoute && <Nav user={user}/> }
+          {ifRoute && <Nav user={user} logOut={logOut}/> }
           <Component {...pageProps} user={user} logOut={logOut} r={router} m={magic}/>
         </span>
       </UserContext.Provider>

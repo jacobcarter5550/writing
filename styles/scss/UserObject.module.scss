@@ -1,0 +1,39 @@
+
+.object{
+    background-color: #C59F5D;
+    padding: 1%;
+    border-radius: 12px;
+    width: 25%;
+
+    span{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        img{
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+        }
+    }
+
+    h3{
+        color: #2E2E2F;
+        margin-bottom: 0px;
+        margin-left: 3.2%;
+    }
+
+    article {
+        display: flex;
+        flex-wrap: wrap;
+
+        ul{
+            padding: 0px;
+            margin: 2% 3%;
+            border-radius: 3px;
+            background-color: #9ABD76;
+            padding: 3px;
+            border: 1px solid #ECE5E9;
+        }
+    }
+}

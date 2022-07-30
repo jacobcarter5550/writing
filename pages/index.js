@@ -10,7 +10,7 @@ function Home({user, logOut, m, r}) {
         {user !== null || user !== undefined ?
           <Lander user={user} m={m} r={r}/>
         :
-          <h1 onClick={ ()=>{logOut()}}>Log Out</h1>
+          <h1 onClick={()=>{logOut()}}>Log Out</h1>
         }
       </section>
     </div>
