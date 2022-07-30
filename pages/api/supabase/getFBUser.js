@@ -2,12 +2,12 @@
 import { createClient } from '@supabase/supabase-js'
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { notionCreate } from '../../../lib/api'
 
 const supabaseUrl = 'https://kxbbsrhjudgafnkyawbw.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
+const address = 'https://www.publishingpals.xyz'
 
 export default async function getUserFB (req, res) {
     const graph = 'https://graph.facebook.com/me?fields=id,name,first_name,middle_name,last_name,email,address,link,picture'

@@ -5,7 +5,7 @@ const supabaseUrl = 'https://kxbbsrhjudgafnkyawbw.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-const address = 'http://localhost:3010'
+const address = 'https://www.publishingpals.xyz'
 
 export default async function updateForm (req, res) {
     let userData = req.body.userData,
