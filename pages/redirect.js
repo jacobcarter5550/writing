@@ -33,8 +33,16 @@ function redirect({r}) {
             if(result) {
                 setRes(result)
                 const res = await setFBUser(result)
-                const userData = await magic.user.getMetadata(),
-                    userSynth = {
+                const userData = await magic.user.getMetadata()
+                if(res.status == 500) {
+                    setUser(userData)
+                    r.push({
+                        pathname: '/onboarding',
+                        query: { name: userSynth.fbData.name },
+                    })
+                    return
+                }
+                const userSynth = {
                         ...userData,
                         ...res
                     }

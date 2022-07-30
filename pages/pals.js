@@ -15,7 +15,7 @@ function pals ({user}) {
                 const res = await getPals()
                 console.log(res)
                 const userFilter = res.filter((users)=> !users.testAccount == true)
-                // .filter((users) => users.id !== user?.id)
+                .filter((users) => users.id !== user?.id)
                 setUserList(userFilter)
             }   
             getSort()

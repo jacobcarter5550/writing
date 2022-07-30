@@ -13,7 +13,7 @@ function Form({r}) {
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({interest_tags:[], name: value})
 
-    const topics = ['Web3', 'Crypto', 'Future of Work', 'Product Management', 'Dating', 'Advice', 'Software Development', 'Startups', 'Short Stories', 'Habit Optimization', 'Open Learning', 'Artificial Intelligence', 'Fitness', 'Diet', 'YouTube', 'Twitter', 'Social Media', 'Machine Learning', 'Hardware Development', 'Graphic Design', 'Cooking', 'Art', 'Poetry', 'Creative Writing', 'Traveling', 'Nomading', 'Animation', 'Data Science', 'Bio-Science', 'Climate Change', 'Neuro-Tech', ]
+    const topics = ['Startups', 'Crypto', 'Software Engineering', 'Hardware Engineering', 'Data Science', 'Future of Work', 'Product Management', 'Productivity', 'Health', 'Education', 'Social Media', 'Design', 'Cooking', 'Creative Writing', 'Traveling', 'Climate Change']
 
     function isFilled (obj) {
         return formData[obj] == undefined ? '#9ABD76' : '#C59F5D'
@@ -60,7 +60,8 @@ function Form({r}) {
                 <input onChange={(e)=>{setNew(e,'name')}} type="text" placeholder='Me llamo' value={value}/>
             </span>
             <textarea rows="3" placeholder='Introduction' onChange={(e)=>{setNew(e,'first')}}/>
-            <h3 style={{color:isFilled('first')}}>What are some topics that intrest you? (Choose up to six)</h3>
+            <h3 style={{color:isFilled('first')}}>What are some topics that intrest you? (Choose up to five)</h3>
+                <p> <a href='https://www.facebook.com/profile.php?id=100081804713750'>Dont see a tag you wish you did? Ping Jacob →</a></p>
             <aside className={styles.tags}>
                 {topics.map((item, ind)=>{
                     function setOAdd() {
@@ -71,7 +72,7 @@ function Form({r}) {
                                 interest_tags : removed
                             }))
                         } else {
-                            if(formData.interest_tags.length < 6){
+                            if(formData.interest_tags.length < 5){
                                 setFormData(prevState=>({
                                     ...prevState,
                                     interest_tags : [...prevState.interest_tags, item]
