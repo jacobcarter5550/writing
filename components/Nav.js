@@ -6,7 +6,7 @@ function Nav({user, logOut}) {
   return (
     <div className={styles.nav}>
       <img src="/PubPal.svg" alt="" />
-      <Link href='https://www.facebook.com/groups/publishingpals'>Home</Link>
+      <a href='https://www.facebook.com/groups/publishingpals' target='_blank'>Home</a>
       <Link href='/pals'>Pals</Link>
       <Link href='/dash'>Profile</Link>
       <p style={{cursor:'pointer'}} onClick={()=>{logOut()}}>Log Out</p>
