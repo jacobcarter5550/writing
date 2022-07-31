@@ -36,7 +36,7 @@ export default async function getUserFB (req, res) {
             id : id, email : email, issuer: 'fb', questionID:uuid, isFB :true, fbData : idToke, name : name,
         }]))
 
-        const {data: resp, error} = await supabase.from('users').select('*, questionID(*), fbData(*),').match({id:id})
+        const {data: resp, error} = await supabase.from('users').select('*, questionID(*), fbData(*)').match({id:id})
 
         if (resp) {
             res.json(resp[0])
