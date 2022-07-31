@@ -9,6 +9,8 @@ import { CookiesProvider, useCookies } from "react-cookie";
 import initUser from '../components/function/initUser';
 import outUser from '../components/function/outUser';
 import Nav from '../components/Nav';
+import { Provider } from 'react-redux'
+import { store } from '../redux/store'
 
 function MyApp({ Component, pageProps, router }) {
 
@@ -29,19 +31,21 @@ useEffect(() => {
   const ifRoute = (router.asPath !== '/' && !router.asPath.includes('redirect') && !router.asPath.includes('onboarding')) ? true : false
 
   return(
-    <CookiesProvider>
-      <UserContext.Provider value={[user, setUser]}>
-        <span style={{display: ifRoute ?'flex' : ''}}>
-          <Head>
-            <title>Publishing Pals</title>
-            <meta name="description" content="Where Publishing Pals come together" />
-            <link rel="icon" href="/PubPal.svg" />
-          </Head>
-          {ifRoute && <Nav user={user} logOut={logOut}/> }
-          <Component {...pageProps} user={user} logOut={logOut} r={router} m={magic}/>
-        </span>
-      </UserContext.Provider>
-    </CookiesProvider>
+    <Provider store={store}>
+      <CookiesProvider>
+        <UserContext.Provider value={[user, setUser]}>
+          <span style={{display: ifRoute ?'flex' : ''}}>
+            <Head>
+              <title>Publishing Pals</title>
+              <meta name="description" content="Where Publishing Pals come together" />
+              <link rel="icon" href="/PubPal.svg" />
+            </Head>
+            {ifRoute && <Nav user={user} logOut={logOut}/> }
+            <Component {...pageProps} user={user} logOut={logOut} r={router} m={magic}/>
+          </span>
+        </UserContext.Provider>
+      </CookiesProvider>
+    </Provider>
   )
 }
 

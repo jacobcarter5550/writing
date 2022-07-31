@@ -1,12 +1,19 @@
 import styles from '../styles/Master.module.scss'
 
-function UserObject({data}) {
-    
+function UserObject({data, r}) {
+
     const userInterests = data.questionID.interest_tags,
-        pic = data.fbData.pictureURL
+        pic = data.fbData?.pictureURL
+
+    function goToPal (ud) {
+        r.push({
+            pathname: `/pals/${ud.id}`,
+            query: { user: data.name },
+        })
+    }
 
     return (
-        <div className={styles.object}>
+        <div onClick={()=>{goToPal(data)}} className={styles.object}>
             <span style={{display:'flex'}}>
                 <img src={pic} alt="" />
                 <h2>{data.name}</h2>
