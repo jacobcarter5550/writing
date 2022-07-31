@@ -26,7 +26,7 @@ useEffect(() => {
     outUser(magic, router, removeUC)
   }
 
-  const ifRoute = (router.asPath !== '/' && !router.asPath.includes('redirect') && router.asPath.includes('onboarding')) ? true : false
+  const ifRoute = (router.asPath !== '/' && !router.asPath.includes('redirect') && !router.asPath.includes('onboarding')) ? true : false
 
   return(
     <CookiesProvider>
