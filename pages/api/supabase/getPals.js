@@ -11,8 +11,6 @@ export default async function getPals (req, res) {
 
     let { data, error } = await supabase.from('users').select('*, questionID(*),fbData(*)')
 
-    console.log(data)
-
     res.json({data:data})
     res.status(200).end()
 }
