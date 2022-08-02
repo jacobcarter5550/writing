@@ -1,0 +1,618 @@
+// @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap");
+
+// $--c-100: #f7f8fa;
+// $--c-200: #eeeff1;
+// $--c-300: #dddee0;
+// $--c-400: #cacace;
+// $--c-500: #babec9;
+// $--c-600: #7e828f;
+// $--c-650: #5e6172;
+// $--c-700: #383d51;
+// $--c-800: #22273C;
+
+$--f-title: 44px;
+$--f-header-1: 28px;
+$--f-header: 20px;
+$--f-subheader: 18px;
+$--f-regular: 15px;
+$--f-small: 13px;
+$--f-mini: 12px;
+$--f-tiny: 10px;
+
+$--fs-header: inherit;
+$--fs-text: inherit;
+a,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  letter-spacing: normal;
+}
+body,
+button,
+input,
+input::placeholder,
+textarea,
+textarea::placeholder {
+  font-weight: 400;
+  font-family: inherit;
+  background-color: transparent;
+
+  letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+}
+
+.anim {
+  animation: fadeIn 250ms ease;
+  -webkit-animation: fadeIn 250ms ease;
+  -moz-animation: fadeIn 250ms ease;
+}
+
+.flex {
+  flex: 1;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 40px;
+  }
+}
+@-webkit-keyframes fadeUp {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 40px;
+  }
+}
+@-moz-keyframes fadeUp {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 40px;
+  }
+}
+
+@keyframes fadeUpIn {
+  from {
+    transform: scale(1.05);
+    transform-origin: top center;
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeUpIn {
+  from {
+    -webkit-transform: scale(1.05);
+    transform-origin: top center;
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: scale(1);
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeUpIn {
+  from {
+    -moz-transform: scale(1.05);
+    transform-origin: top center;
+    opacity: 0;
+  }
+  to {
+    -moz-transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInWidth {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 64px;
+  }
+}
+@-webkit-keyframes fadeInWidth {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 64px;
+  }
+}
+@-moz-keyframes fadeInWidth {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 64px;
+  }
+}
+
+@mixin num-lines($value: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $value; /* number of lines to show */
+}
+
+.clamp-1 {
+  @include num-lines(1);
+}
+
+// adds browser support for removing ability to select text
+@mixin user-select($what: none) {
+  -webkit-user-select: $what;
+  -moz-user-select: $what;
+  -ms-user-select: $what;
+  -o-user-select: $what;
+  user-select: $what;
+}
+
+// adds browser support for transitions
+@mixin transition($what: all, $time: 0.2s) {
+  -webkit-transition: $what $time;
+  -moz-transition: $what $time;
+  -ms-transition: $what $time;
+  -o-transition: $what $time;
+  transition: $what $time;
+}
+
+@mixin tabletandmobile {
+  @media (max-width: 940px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 720px) {
+    @content;
+  }
+}
+
+@mixin not_mobile {
+  @media (min-width: 720px) {
+    @content;
+  }
+}
+
+// Border Radius
+@mixin border-radius($value) {
+  -webkit-border-radius: $value;
+  -khtml-border-radius: $value;
+  -moz-border-radius: $value;
+  border-radius: $value;
+}
+
+@mixin light-mode() {
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
+}
+
+@mixin space-mode() {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+// Flexbox presets
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+@mixin flex-direction($value: row) {
+  @if $value == row-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+    -moz-box-direction: reverse;
+    -moz-box-orient: horizontal;
+  } @else if $value == column {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: normal;
+    -moz-box-orient: vertical;
+  } @else if $value == column-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: reverse;
+    -moz-box-orient: vertical;
+  } @else {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -moz-box-orient: horizontal;
+  }
+  -webkit-flex-direction: $value;
+  -ms-flex-direction: $value;
+  flex-direction: $value;
+}
+@mixin flex-wrap($value: nowrap) {
+  // No Webkit/FF Box fallback.
+  -webkit-flex-wrap: $value;
+  @if $value == nowrap {
+    -ms-flex-wrap: none;
+  } @else {
+    -ms-flex-wrap: $value;
+  }
+  flex-wrap: $value;
+}
+@mixin justify-content($value: flex-start) {
+  @if $value == flex-start {
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -ms-flex-pack: start;
+  } @else if $value == flex-end {
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -ms-flex-pack: end;
+  } @else if $value == space-between {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-pack: distribute;
+  } @else {
+    -webkit-box-pack: $value;
+    -moz-box-pack: $value;
+    -ms-flex-pack: $value;
+  }
+  -webkit-justify-content: $value;
+  justify-content: $value;
+}
+@mixin align-items($value: stretch) {
+  @if $value == flex-start {
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+  } @else if $value == flex-end {
+    -webkit-box-align: end;
+    -moz-box-align: end;
+    -ms-flex-align: end;
+  } @else {
+    -webkit-box-align: $value;
+    -moz-box-align: $value;
+    -ms-flex-align: $value;
+  }
+  -webkit-align-items: $value;
+  align-items: $value;
+}
+
+.max {
+  &-w {
+    width: 100%;
+  }
+  &-h {
+    height: 100%;
+  }
+  &-vh {
+    height: 100vh;
+  }
+  &-vw {
+    width: 100vw;
+  }
+}
+
+.col {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(flex-start);
+  @include align-items(flex-start);
+}
+.col-fs-c {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(flex-start);
+  @include align-items(center);
+}
+.col-c,
+.col-c-fs {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(flex-start);
+}
+.col-c-c {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(center);
+  @include align-items(center);
+}
+.col-sa-fs,
+.col-sa {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(space-around);
+  @include align-items(flex-start);
+}
+.col-sa-c {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(space-around);
+  @include align-items(center);
+}
+.col-sb-fs,
+.col-sb {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(space-between);
+  @include align-items(flex-start);
+}
+.col-sb-c {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(space-between);
+  @include align-items(center);
+}
+.col-se-fs,
+.col-se {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(space-evenly);
+  @include align-items(flex-start);
+}
+.col-se-c {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(space-evenly);
+  @include align-items(center);
+}
+.col-fe-fs,
+.col-fe {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(flex-end);
+  @include align-items(flex-start);
+}
+.col-fe-c {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(flex-end);
+  @include align-items(center);
+}
+.col-c-fe {
+  @include flexbox;
+  @include flex-direction(column);
+  @include align-items(flex-end);
+  @include justify-content(center);
+}
+.col-fs-fe {
+  @include flexbox;
+  @include flex-direction(column);
+  @include justify-content(flex-start);
+  @include align-items(flex-end);
+}
+
+.row {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+  @include align-items(flex-start);
+}
+.row-c-fs,
+.row-c {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(center);
+  @include align-items(flex-start);
+}
+.row-c-c {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(center);
+  @include align-items(center);
+}
+.row-fs-c {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+  @include align-items(center);
+}
+.row-sa-fs,
+.row-sa {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(space-around);
+  @include align-items(flex-start);
+}
+.row-sa-c {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(space-around);
+  @include align-items(center);
+}
+.row-sb-fs,
+.row-sb {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(space-between);
+  @include align-items(flex-start);
+}
+.row-sb-c {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(space-between);
+  @include align-items(center);
+}
+.row-sb-fe {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(space-between);
+  @include align-items(flex-end);
+}
+.row-se-fs,
+.row-se {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(space-evenly);
+  @include align-items(flex-start);
+}
+.row-se-c {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(space-evenly);
+  @include align-items(center);
+}
+.row-fe-fs,
+.row-fe {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(flex-end);
+  @include align-items(flex-start);
+}
+.row-fs-fe {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(flex-start);
+  @include align-items(flex-end);
+}
+.row-c-fe {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(center);
+  @include align-items(flex-end);
+}
+.row-fe-c {
+  @include flexbox;
+  @include flex-direction(row);
+  @include justify-content(flex-end);
+  @include align-items(center);
+}
+.desktop-only {
+  display: block;
+  @include mobile {
+    display: none;
+  }
+}
+.mobile-only {
+  display: none;
+  @include tabletandmobile {
+    display: block;
+  }
+}
+
+.d-2 {
+  @include border-radius(2px);
+  // @include transition(all, 100ms);
+}
+.d-3 {
+  @include border-radius(3px);
+  // @include transition(all, 100ms);
+}
+.d-4 {
+  @include border-radius(4px);
+  // @include transition(all, 100ms);
+}
+.d-5 {
+  @include border-radius(5px);
+  // @include transition(all, 100ms);
+}
+.d-7 {
+  @include border-radius(7px);
+  // @include transition(all, 100ms);
+}
+.d-8 {
+  @include border-radius(8px);
+  // @include transition(all, 100ms);
+}
+.d-10 {
+  @include border-radius(10px);
+  // @include transition(all, 100ms);
+}
+.d-16 {
+  @include border-radius(16px);
+  // @include transition(all, 100ms);
+}
+.d-100 {
+  @include border-radius(100px);
+  // @include transition(all, 100ms);
+}
+
+.lines {
+  &-1 {
+    @include num-lines(1);
+  }
+  &-2 {
+    @include num-lines(2);
+  }
+  &-3 {
+    @include num-lines(3);
+  }
+}

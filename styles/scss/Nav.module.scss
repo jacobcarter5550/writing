@@ -1,3 +1,4 @@
+@import '../mixins';
 .nav{
     width: 8.5%;
     height: 100vh;
@@ -18,4 +19,23 @@
         margin-bottom: 10%;
     }
 
+    @include mobile() {
+        width: 20%;
+
+        img{
+            width: 40%;
+            margin-top: 20%;
+            margin-left: 20%;
+        }
+
+        a{
+            font-size: 1em;
+            margin-left: 15%;
+        }
+
+        p{
+            font-size: 1em;
+            margin-left: 15%;
+        }
+    }
 }

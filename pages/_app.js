@@ -11,6 +11,7 @@ import outUser from '../components/function/outUser';
 import Nav from '../components/Nav';
 import { Provider } from 'react-redux'
 import { store } from '../redux/store'
+import styles from '../styles/scss/Default.module.scss'
 
 function MyApp({ Component, pageProps, router }) {
 
@@ -34,7 +35,7 @@ useEffect(() => {
     <Provider store={store}>
       <CookiesProvider>
         <UserContext.Provider value={[user, setUser]}>
-          <span style={{display: ifRoute ?'flex' : ''}}>
+          <span style={{display: ifRoute ?'flex' : ''}} className={styles.app}>
             <Head>
               <title>Publishing Pals</title>
               <meta name="description" content="Where Publishing Pals come together" />
