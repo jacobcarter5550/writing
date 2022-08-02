@@ -4,6 +4,7 @@
 @import './scss/UserObject.module.scss';
 @import './scss/Pals.module.scss';
 @import './scss/Profile.module.scss';
+@import './mixins';
 
 .fullscreenModal {
     position: fixed;
@@ -12,7 +13,7 @@
     top: 0;
     left: 0;
     background-color: rgba(0,0,0,0.5);
-    
+
     aside{
         width: 40%;
         height: 50%;
@@ -59,3 +60,4 @@
         color: #ECE5E9;
     }
 }
+

@@ -19,7 +19,6 @@ function index ({user, r}) {
             async function getSort () {
                 const res = await getPals()
                 const userFilter = res.filter((users)=> !users.testAccount == true)
-                .filter((users) => users.id !== user?.id)
                 addToList(userFilter)
                 setUserList(userFilter)
             }   
@@ -29,9 +28,9 @@ function index ({user, r}) {
 
     return (
         <div className={styles.pals}>
-            <h1>User</h1>
+            <h1>Users</h1>
             {userList.map((item, ind)=>{
-            return <span key={ind}><UserObject data={item} r={r}/></span>
+                return <span key={ind}><UserObject user={user} data={item} r={r}/></span>
             })}
         </div>
     )

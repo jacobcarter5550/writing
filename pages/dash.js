@@ -13,23 +13,24 @@ function dash({r,logOut}) {
             <Loading loading={true}/> 
         :
             <div className={styles.profile}>
-                <span style={{display:'flex', alignItems:'center', width:'300px'}}>
+                <span >
                     <h1>{user.name}</h1>
                     <img style={{width:'50px', height:'50px',borderRadius:'6px', marginLeft:'5%'}} src={user.fbData.pictureURL} alt="" />
                 </span>
-                <span style={{display:'flex', justifyContent:'space-between'}}>
-                    <div style={{width:'45%'}}>
+                <span >
+                    <h3 onClick={()=>{r.push('/pals')}}>←</h3>
+                    <div >
                         <h3>Intro</h3>
                         <p>{user.questionID.first}</p>
                     </div>
-                    <div>
+                    <aside >
                         <h3>Interests</h3>
                         <article className={styles.tags} >
                             {user.questionID.interest_tags.map((item)=>{
                                 return <p style={tag}>{item}</p>
                             })}
                         </article>
-                    </div>
+                    </aside>
                 </span>
             </div>
         }

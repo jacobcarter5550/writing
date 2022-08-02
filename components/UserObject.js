@@ -1,15 +1,19 @@
 import styles from '../styles/Master.module.scss'
 
-function UserObject({data, r}) {
+function UserObject({data, r, user}) {
 
     const userInterests = data.questionID.interest_tags,
         pic = data.fbData?.pictureURL
 
     function goToPal (ud) {
-        r.push({
-            pathname: `/pals/${ud.id}`,
-            query: { user: data.name },
-        })
+        if(user.id == ud.id)  {
+            r.push('/dash')
+        } else {
+            r.push({
+                pathname: `/pals/${ud.id}`,
+                query: { user: data.name },
+            })
+        }
     }
 
     return (
