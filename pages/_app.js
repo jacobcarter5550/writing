@@ -35,11 +35,12 @@ useEffect(() => {
     <Provider store={store}>
       <CookiesProvider>
         <UserContext.Provider value={[user, setUser]}>
-          <span style={{display: ifRoute ?'flex' : ''}} className={styles.app}>
+          <span style={{display: ifRoute ?'flex' : '', width:'100vw'}} className={styles.app}>
             <Head>
               <title>Publishing Pals</title>
               <meta name="description" content="Where Publishing Pals come together" />
               <link rel="icon" href="/PubPal.svg" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             {ifRoute && <Nav user={user} logOut={logOut}/> }
             <Component {...pageProps} user={user} logOut={logOut} r={router} m={magic}/>

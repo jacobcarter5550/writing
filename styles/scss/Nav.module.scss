@@ -1,11 +1,23 @@
 @import '../mixins';
+
+.placeholderNav{
+    width: 8.5%;
+    height: 100vh;
+    margin-right: 5%;
+    padding: 1.5%;
+
+    @include mobile() {
+        width: 25%;
+    }
+}
+
 .nav{
     width: 8.5%;
     height: 100vh;
     background-color: #1E1E20;
-    margin-right: 2.5%;
     border-radius: 0px 12px 12px 0px;
     padding: 1.5%;
+    position: fixed;
 
     img{
         margin-bottom: 35%;
