@@ -5,6 +5,9 @@ const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export default async function updateForm (req, res) {
+
+    console.log(req.body)
+
     let userData = req.body.userData,
         form = req.body.form
 

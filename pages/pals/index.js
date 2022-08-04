@@ -29,9 +29,11 @@ function index ({user, r}) {
     return (
         <div className={styles.pals}>
             <h1>Users</h1>
-            {userList.map((item, ind)=>{
-                return <span key={ind}><UserObject user={user} data={item} r={r}/></span>
-            })}
+            <aside style={{display:'flex', width:'95%',flexWrap:'wrap', justifyContent:'space-between'}}>
+                {userList.map((item)=>{
+                    return <UserObject user={user} data={item} r={r}/>
+                })}
+            </aside>
         </div>
     )
 }

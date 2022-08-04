@@ -4,6 +4,7 @@ import { updateUserForm } from '../lib/api'
 import Loading from './Loading'
 import { useContext} from 'react'
 import { UserContext } from '../lib/UserContext';
+import {topics} from './function/topics'
 
 function Form({r}) {
     const [user, setUser, posts] = useContext(UserContext)
@@ -12,8 +13,6 @@ function Form({r}) {
 
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({interest_tags:[], name: value})
-
-    const topics = ['Startups', 'Crypto', 'Software Engineering', 'Hardware Engineering', 'Data Science', 'Future of Work', 'Product Management', 'Productivity', 'Health', 'Education', 'Social Media', 'Design', 'Cooking', 'Creative Writing', 'Traveling', 'Climate Change']
 
     function isFilled (obj) {
         return formData[obj] == undefined ? '#9ABD76' : '#C59F5D'
